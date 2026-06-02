@@ -1,0 +1,6 @@
+{
+  "USB_AUTOPLAY": {
+    "PLUGIN_NAME": "USB Autoplay",
+    "PLUGIN_DESCRIPTION": "Automatically play music from a USB stick on boot or when inserted."
+  }
+}

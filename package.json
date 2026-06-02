@@ -1,0 +1,22 @@
+{
+  "name": "usb-autoplay-plugin",
+  "version": "0.0.1",
+  "description": "USB autoplay plugin for Volumio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "author": "Manuel Finotto",
+  "license": "MIT",
+  "volumio_info": {
+    "prettyName": "USB Autoplay",
+    "plugin_type": "system_hardware",
+    "icon": "fa-usb",
+    "boot_priority": "10"
+  },
+  "dependencies": {
+    "kew": "^0.7.0",
+    "v-conf": "^1.4.0",
+    "fs-extra": "^11.2.0"
+  }
+}

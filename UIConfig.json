@@ -1,0 +1,60 @@
+{
+  "page": {
+    "label": "USB Autoplay",
+    "description": "Automatically play music from a USB stick on boot or when inserted."
+  },
+  "sections": [
+    {
+      "id": "usb_autoplay_settings",
+      "element": "section",
+      "label": "USB Autoplay Settings",
+      "icon": "fa-usb",
+      "onSave": {
+        "type": "controller",
+        "endpoint": "system_hardware/usb_autoplay",
+        "method": "saveSettings"
+      },
+      "content": [
+        {
+          "id": "enabled",
+          "element": "switch",
+          "label": "Enable USB autoplay",
+          "value": true
+        },
+        {
+          "id": "usbPath",
+          "element": "input",
+          "label": "USB path",
+          "value": "USB",
+          "description": "Default: USB. Use USB/folder_name to restrict playback to a specific folder."
+        },
+        {
+          "id": "random",
+          "element": "switch",
+          "label": "Random playback",
+          "value": true
+        },
+        {
+          "id": "repeat",
+          "element": "switch",
+          "label": "Repeat playback",
+          "value": true
+        },
+        {
+          "id": "forcePlayback",
+          "element": "switch",
+          "label": "Force playback on USB detection",
+          "value": true,
+          "description": "Stops current playback and starts USB playback when USB content is detected."
+        },
+        {
+          "id": "pollIntervalSeconds",
+          "element": "input",
+          "label": "Polling interval in seconds",
+          "value": "10",
+          "description": "How often the plugin checks for USB content."
+        }
+      ]
+    }
+  ]
+}
