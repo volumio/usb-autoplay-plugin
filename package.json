@@ -1,6 +1,6 @@
 {
   "name": "usb-autoplay-plugin",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "USB autoplay plugin for Volumio",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,7 @@
     "boot_priority": "10",
     "os": ["bookworm"],
     "details": "Automatically starts playback from USB media on boot or when a USB filesystem is inserted.",
-    "changelog": "Reworked trigger mechanism from polling to udev plus systemd service."
+    "changelog": "Validated udev/systemd autoplay flow with PulseAudio handling and delayed double play command."
   },
   "dependencies": {
     "kew": "^0.7.0",

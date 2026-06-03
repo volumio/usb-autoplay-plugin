@@ -91,6 +91,9 @@ mpc single off > /dev/null 2>&1 || true
 mpc consume off > /dev/null 2>&1 || true
 
 log "Starting USB playback"
+sleep 2
+mpc play > /dev/null 2>&1 || true
+sleep 2
 mpc play > /dev/null 2>&1
 
 log "USB autoplay completed successfully"
