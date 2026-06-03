@@ -1,7 +1,7 @@
 # USB Autoplay Plugin
 
-Volumio plugin for automatic playback of USB media.
+Volumio OEM plugin for automatic playback of USB media.
 
-This plugin reproduces the USB autoplay behavior previously implemented through a shell script, systemd service and udev rule.
+This version uses udev + systemd to trigger playback on physical USB insertion.
 
 Author: Manuel Finotto

@@ -41,18 +41,11 @@
           "value": true
         },
         {
-          "id": "forcePlayback",
+          "id": "killPulseAudio",
           "element": "switch",
-          "label": "USB_AUTOPLAY.FORCE_PLAYBACK_LABEL",
+          "label": "USB_AUTOPLAY.KILL_PULSEAUDIO_LABEL",
           "value": true,
-          "description": "USB_AUTOPLAY.FORCE_PLAYBACK_DESCRIPTION"
-        },
-        {
-          "id": "pollIntervalSeconds",
-          "element": "input",
-          "label": "USB_AUTOPLAY.POLL_INTERVAL_LABEL",
-          "value": "10",
-          "description": "USB_AUTOPLAY.POLL_INTERVAL_DESCRIPTION"
+          "description": "USB_AUTOPLAY.KILL_PULSEAUDIO_DESCRIPTION"
         }
       ]
     }

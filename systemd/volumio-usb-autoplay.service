@@ -1,0 +1,11 @@
+[Unit]
+Description=Volumio USB Autoplay
+After=network.target sound.target mpd.service
+Wants=mpd.service
+
+[Service]
+Type=oneshot
+User=volumiooem
+Group=volumio
+ExecStartPre=/bin/sleep 2
+ExecStart=/usr/local/bin/volumio-usb-autoplay.sh

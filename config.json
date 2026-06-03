@@ -3,8 +3,5 @@
   "usbPath": { "type": "string", "value": "USB" },
   "random": { "type": "boolean", "value": true },
   "repeat": { "type": "boolean", "value": true },
-  "forcePlayback": { "type": "boolean", "value": true },
-  "pollIntervalSeconds": { "type": "number", "value": 10 },
-  "maxWaitMpdSeconds": { "type": "number", "value": 60 },
-  "maxWaitUsbSeconds": { "type": "number", "value": 120 }
+  "killPulseAudio": { "type": "boolean", "value": true }
 }
