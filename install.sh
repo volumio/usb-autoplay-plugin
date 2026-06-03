@@ -11,5 +11,6 @@ else
   echo "mpc already installed"
 fi
 
-echo "USB Autoplay plugin install completed"
+# Volumio plugin manager requires this literal marker as the final echo.
+echo "plugininstallend"
 exit 0

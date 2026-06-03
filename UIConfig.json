@@ -1,58 +1,58 @@
 {
   "page": {
-    "label": "USB Autoplay",
-    "description": "Automatically play music from a USB stick on boot or when inserted."
+    "label": "USB_AUTOPLAY.PLUGIN_NAME",
+    "description": "USB_AUTOPLAY.PLUGIN_DESCRIPTION"
   },
   "sections": [
     {
       "id": "usb_autoplay_settings",
       "element": "section",
-      "label": "USB Autoplay Settings",
+      "label": "USB_AUTOPLAY.SETTINGS_SECTION",
       "icon": "fa-usb",
       "onSave": {
         "type": "controller",
-        "endpoint": "system_hardware/usb_autoplay",
+        "endpoint": "system_hardware/usb-autoplay-plugin",
         "method": "saveSettings"
       },
       "content": [
         {
           "id": "enabled",
           "element": "switch",
-          "label": "Enable USB autoplay",
+          "label": "USB_AUTOPLAY.ENABLE_LABEL",
           "value": true
         },
         {
           "id": "usbPath",
           "element": "input",
-          "label": "USB path",
+          "label": "USB_AUTOPLAY.USB_PATH_LABEL",
           "value": "USB",
-          "description": "Default: USB. Use USB/folder_name to restrict playback to a specific folder."
+          "description": "USB_AUTOPLAY.USB_PATH_DESCRIPTION"
         },
         {
           "id": "random",
           "element": "switch",
-          "label": "Random playback",
+          "label": "USB_AUTOPLAY.RANDOM_LABEL",
           "value": true
         },
         {
           "id": "repeat",
           "element": "switch",
-          "label": "Repeat playback",
+          "label": "USB_AUTOPLAY.REPEAT_LABEL",
           "value": true
         },
         {
           "id": "forcePlayback",
           "element": "switch",
-          "label": "Force playback on USB detection",
+          "label": "USB_AUTOPLAY.FORCE_PLAYBACK_LABEL",
           "value": true,
-          "description": "Stops current playback and starts USB playback when USB content is detected."
+          "description": "USB_AUTOPLAY.FORCE_PLAYBACK_DESCRIPTION"
         },
         {
           "id": "pollIntervalSeconds",
           "element": "input",
-          "label": "Polling interval in seconds",
+          "label": "USB_AUTOPLAY.POLL_INTERVAL_LABEL",
           "value": "10",
-          "description": "How often the plugin checks for USB content."
+          "description": "USB_AUTOPLAY.POLL_INTERVAL_DESCRIPTION"
         }
       ]
     }

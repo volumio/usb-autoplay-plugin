@@ -1,6 +1,6 @@
 {
   "name": "usb-autoplay-plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "USB autoplay plugin for Volumio",
   "main": "index.js",
   "scripts": {
@@ -8,11 +8,19 @@
   },
   "author": "Manuel Finotto",
   "license": "MIT",
+  "engines": {
+    "node": ">=14"
+  },
   "volumio_info": {
     "prettyName": "USB Autoplay",
     "plugin_type": "system_hardware",
     "icon": "fa-usb",
-    "boot_priority": "10"
+    "boot_priority": "10",
+    "os": [
+      "bookworm"
+    ],
+    "details": "Automatically starts playback from USB media on boot or when USB content is detected.",
+    "changelog": "Initial development version with polling-based USB detection."
   },
   "dependencies": {
     "kew": "^0.7.0",

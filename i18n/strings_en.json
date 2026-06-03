@@ -1,6 +1,16 @@
 {
   "USB_AUTOPLAY": {
     "PLUGIN_NAME": "USB Autoplay",
-    "PLUGIN_DESCRIPTION": "Automatically play music from a USB stick on boot or when inserted."
+    "PLUGIN_DESCRIPTION": "Automatically play music from a USB stick on boot or when inserted.",
+    "SETTINGS_SECTION": "USB Autoplay Settings",
+    "ENABLE_LABEL": "Enable USB autoplay",
+    "USB_PATH_LABEL": "USB path",
+    "USB_PATH_DESCRIPTION": "Default: USB. Use USB/folder_name to restrict playback to a specific folder.",
+    "RANDOM_LABEL": "Random playback",
+    "REPEAT_LABEL": "Repeat playback",
+    "FORCE_PLAYBACK_LABEL": "Force playback on USB detection",
+    "FORCE_PLAYBACK_DESCRIPTION": "Stops current playback and starts USB playback when USB content is detected.",
+    "POLL_INTERVAL_LABEL": "Polling interval in seconds",
+    "POLL_INTERVAL_DESCRIPTION": "How often the plugin checks for USB content."
   }
 }
