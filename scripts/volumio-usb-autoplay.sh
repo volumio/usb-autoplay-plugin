@@ -1,59 +1,55 @@
 #!/bin/bash
-
 set -e
 
 LOGFILE="/var/log/volumio-usb-autoplay.log"
 CONFIG_FILE="/data/plugins/system_hardware/usb-autoplay-plugin/usb-autoplay-runtime.conf"
 
 ENABLED=1
-USB_PATH="USB"
+USB_URI="music-library/USB"
 RANDOM_PLAY=1
 REPEAT_PLAY=1
 KILL_PULSEAUDIO=1
-MAX_WAIT_MPD=60
+MAX_WAIT_API=60
 MAX_WAIT_USB=120
 
 if [ -f "$CONFIG_FILE" ]; then
     . "$CONFIG_FILE"
 fi
 
-log() {
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> "$LOGFILE"
-}
+log() { echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> "$LOGFILE"; }
+api_get() { curl -sS --max-time 10 "$1"; }
+api_post_json() { curl -sS --max-time 20 -X POST "$1" -H "Content-Type: application/json" -d "$2"; }
 
 if [ "$ENABLED" != "1" ]; then
     log "USB autoplay disabled, exiting"
     exit 0
 fi
 
-log "=== Starting USB autoplay sequence ==="
+log "=== Starting USB autoplay sequence through Volumio REST API ==="
 
-log "Waiting for MPD..."
+log "Waiting for Volumio API..."
 elapsed=0
-until mpc status > /dev/null 2>&1; do
+until api_get "http://localhost:3000/api/v1/getState" > /dev/null 2>&1; do
     sleep 2
     elapsed=$((elapsed + 2))
-    if [ "$elapsed" -ge "$MAX_WAIT_MPD" ]; then
-        log "ERROR: timeout waiting for MPD"
+    if [ "$elapsed" -ge "$MAX_WAIT_API" ]; then
+        log "ERROR: timeout waiting for Volumio API"
         exit 1
     fi
 done
-log "MPD ready"
+log "Volumio API ready"
 
-log "Updating MPD library..."
-mpc update > /dev/null 2>&1 || true
-
-log "Waiting for USB content at MPD path: $USB_PATH"
+log "Waiting for USB browse URI: $USB_URI"
 elapsed=0
-until mpc listall "$USB_PATH" 2>/dev/null | grep -q .; do
+until api_get "http://localhost:3000/api/v1/browse?uri=$USB_URI" 2>/dev/null | grep -q '"navigation"\|"items"\|"title"\|"uri"'; do
     sleep 2
     elapsed=$((elapsed + 2))
     if [ "$elapsed" -ge "$MAX_WAIT_USB" ]; then
-        log "ERROR: timeout waiting for USB content at $USB_PATH"
+        log "ERROR: timeout waiting for USB browse URI: $USB_URI"
         exit 1
     fi
 done
-log "USB content available"
+log "USB browse URI available"
 
 if [ "$KILL_PULSEAUDIO" = "1" ]; then
     log "Killing PulseAudio if running"
@@ -61,40 +57,31 @@ if [ "$KILL_PULSEAUDIO" = "1" ]; then
     sleep 1
 fi
 
-log "Stopping current playback"
-mpc stop > /dev/null 2>&1 || true
-
-log "Clearing current playlist"
-mpc clear > /dev/null 2>&1 || true
-
-log "Adding USB content from $USB_PATH"
-mpc add "$USB_PATH" > /dev/null 2>&1
+log "Clearing Volumio queue"
+api_get "http://localhost:3000/api/v1/commands/?cmd=clearQueue" > /dev/null 2>&1 || true
 
 if [ "$RANDOM_PLAY" = "1" ]; then
-    log "Enabling random"
-    mpc random on > /dev/null 2>&1 || true
+    log "Enabling random through Volumio"
+    api_get "http://localhost:3000/api/v1/commands/?cmd=random&value=true" > /dev/null 2>&1 || true
 else
-    log "Disabling random"
-    mpc random off > /dev/null 2>&1 || true
+    log "Disabling random through Volumio"
+    api_get "http://localhost:3000/api/v1/commands/?cmd=random&value=false" > /dev/null 2>&1 || true
 fi
 
 if [ "$REPEAT_PLAY" = "1" ]; then
-    log "Enabling repeat"
-    mpc repeat on > /dev/null 2>&1 || true
+    log "Enabling repeat through Volumio"
+    api_get "http://localhost:3000/api/v1/commands/?cmd=repeat&value=true" > /dev/null 2>&1 || true
 else
-    log "Disabling repeat"
-    mpc repeat off > /dev/null 2>&1 || true
+    log "Disabling repeat through Volumio"
+    api_get "http://localhost:3000/api/v1/commands/?cmd=repeat&value=false" > /dev/null 2>&1 || true
 fi
 
-log "Disabling single and consume"
-mpc single off > /dev/null 2>&1 || true
-mpc consume off > /dev/null 2>&1 || true
+log "Calling replaceAndPlay for USB URI: $USB_URI"
+PAYLOAD="{\"item\":{\"uri\":\"$USB_URI\",\"service\":\"mpd\",\"type\":\"folder\"}}"
+api_post_json "http://localhost:3000/api/v1/replaceAndPlay" "$PAYLOAD" >> "$LOGFILE" 2>&1 || {
+    log "ERROR: replaceAndPlay failed"
+    exit 1
+}
 
-log "Starting USB playback"
-sleep 2
-mpc play > /dev/null 2>&1 || true
-sleep 2
-mpc play > /dev/null 2>&1
-
-log "USB autoplay completed successfully"
+log "USB autoplay command sent successfully"
 exit 0

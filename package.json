@@ -1,28 +1,20 @@
 {
   "name": "usb-autoplay-plugin",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "USB autoplay plugin for Volumio",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"No tests specified\" && exit 0"
-  },
+  "scripts": { "test": "echo \"No tests specified\" && exit 0" },
   "author": "Manuel Finotto",
   "license": "MIT",
-  "engines": {
-    "node": ">=14"
-  },
+  "engines": { "node": ">=14" },
   "volumio_info": {
     "prettyName": "USB Autoplay",
     "plugin_type": "system_hardware",
     "icon": "fa-usb",
     "boot_priority": "10",
     "os": ["bookworm"],
-    "details": "Automatically starts playback from USB media on boot or when a USB filesystem is inserted.",
-    "changelog": "Validated udev/systemd autoplay flow with PulseAudio handling and delayed double play command."
+    "details": "Automatically starts playback from USB media using Volumio's queue and REST API.",
+    "changelog": "Replaced direct MPD playlist manipulation with Volumio REST API to keep UI queue and metadata synchronized."
   },
-  "dependencies": {
-    "kew": "^0.7.0",
-    "v-conf": "^1.4.0",
-    "fs-extra": "^11.2.0"
-  }
+  "dependencies": { "kew": "^0.7.0", "v-conf": "^1.4.0", "fs-extra": "^11.2.0" }
 }

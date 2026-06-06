@@ -4,11 +4,11 @@
     "PLUGIN_DESCRIPTION": "Automatically play music from a USB stick on boot or when inserted.",
     "SETTINGS_SECTION": "USB Autoplay Settings",
     "ENABLE_LABEL": "Enable USB autoplay",
-    "USB_PATH_LABEL": "MPD USB path",
-    "USB_PATH_DESCRIPTION": "Default: USB. Use USB/folder_name to restrict playback to a specific folder.",
+    "USB_URI_LABEL": "Volumio USB URI",
+    "USB_URI_DESCRIPTION": "Default: music-library/USB. Confirm the exact URI with /api/v1/browse?uri=music-library/USB if needed.",
     "RANDOM_LABEL": "Random playback",
     "REPEAT_LABEL": "Repeat playback",
     "KILL_PULSEAUDIO_LABEL": "Kill PulseAudio before playback",
-    "KILL_PULSEAUDIO_DESCRIPTION": "Useful when PulseAudio keeps the DAC busy and prevents MPD from opening the audio device."
+    "KILL_PULSEAUDIO_DESCRIPTION": "Useful when PulseAudio keeps the DAC busy and prevents playback from starting correctly."
   }
 }

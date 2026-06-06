@@ -1,6 +1,6 @@
 {
   "enabled": { "type": "boolean", "value": true },
-  "usbPath": { "type": "string", "value": "USB" },
+  "usbUri": { "type": "string", "value": "music-library/USB" },
   "random": { "type": "boolean", "value": true },
   "repeat": { "type": "boolean", "value": true },
   "killPulseAudio": { "type": "boolean", "value": true }

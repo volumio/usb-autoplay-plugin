@@ -1,52 +1,18 @@
 {
-  "page": {
-    "label": "USB_AUTOPLAY.PLUGIN_NAME",
-    "description": "USB_AUTOPLAY.PLUGIN_DESCRIPTION"
-  },
+  "page": { "label": "USB_AUTOPLAY.PLUGIN_NAME", "description": "USB_AUTOPLAY.PLUGIN_DESCRIPTION" },
   "sections": [
     {
       "id": "usb_autoplay_settings",
       "element": "section",
       "label": "USB_AUTOPLAY.SETTINGS_SECTION",
       "icon": "fa-usb",
-      "onSave": {
-        "type": "controller",
-        "endpoint": "system_hardware/usb-autoplay-plugin",
-        "method": "saveSettings"
-      },
+      "onSave": { "type": "controller", "endpoint": "system_hardware/usb-autoplay-plugin", "method": "saveSettings" },
       "content": [
-        {
-          "id": "enabled",
-          "element": "switch",
-          "label": "USB_AUTOPLAY.ENABLE_LABEL",
-          "value": true
-        },
-        {
-          "id": "usbPath",
-          "element": "input",
-          "label": "USB_AUTOPLAY.USB_PATH_LABEL",
-          "value": "USB",
-          "description": "USB_AUTOPLAY.USB_PATH_DESCRIPTION"
-        },
-        {
-          "id": "random",
-          "element": "switch",
-          "label": "USB_AUTOPLAY.RANDOM_LABEL",
-          "value": true
-        },
-        {
-          "id": "repeat",
-          "element": "switch",
-          "label": "USB_AUTOPLAY.REPEAT_LABEL",
-          "value": true
-        },
-        {
-          "id": "killPulseAudio",
-          "element": "switch",
-          "label": "USB_AUTOPLAY.KILL_PULSEAUDIO_LABEL",
-          "value": true,
-          "description": "USB_AUTOPLAY.KILL_PULSEAUDIO_DESCRIPTION"
-        }
+        { "id": "enabled", "element": "switch", "label": "USB_AUTOPLAY.ENABLE_LABEL", "value": true },
+        { "id": "usbUri", "element": "input", "label": "USB_AUTOPLAY.USB_URI_LABEL", "value": "music-library/USB", "description": "USB_AUTOPLAY.USB_URI_DESCRIPTION" },
+        { "id": "random", "element": "switch", "label": "USB_AUTOPLAY.RANDOM_LABEL", "value": true },
+        { "id": "repeat", "element": "switch", "label": "USB_AUTOPLAY.REPEAT_LABEL", "value": true },
+        { "id": "killPulseAudio", "element": "switch", "label": "USB_AUTOPLAY.KILL_PULSEAUDIO_LABEL", "value": true, "description": "USB_AUTOPLAY.KILL_PULSEAUDIO_DESCRIPTION" }
       ]
     }
   ]
