@@ -1,6 +1,6 @@
 {
   "name": "usb-autoplay-plugin",
-  "version": "0.0.6",
+  "version": "1.0.0",
   "description": "USB autoplay plugin for Volumio",
   "main": "index.js",
   "scripts": { "test": "echo \"No tests specified\" && exit 0" },
@@ -13,8 +13,8 @@
     "icon": "fa-usb",
     "boot_priority": "10",
     "os": ["bookworm"],
-    "details": "Automatically starts playback from USB media using Volumio's queue and REST API.",
-    "changelog": "Replaced direct MPD playlist manipulation with Volumio REST API to keep UI queue and metadata synchronized."
+    "details": "Automatically starts playback from USB media when a USB drive is inserted or already present at boot. Uses Volumio REST APIs to keep queue, metadata and artwork fully synchronized with the user interface.",
+    "changelog": "1.0.0 - First stable release. Added USB hot-plug autoplay, boot-time autoplay, Volumio REST API integration, queue and metadata synchronization, random/repeat support, and udev-based triggering."
   },
   "dependencies": { "kew": "^0.7.0", "v-conf": "^1.4.0", "fs-extra": "^11.2.0" }
 }

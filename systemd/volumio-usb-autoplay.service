@@ -7,5 +7,4 @@ Wants=volumio.service
 Type=oneshot
 User=volumiooem
 Group=volumio
-ExecStartPre=/bin/sleep 3
 ExecStart=/usr/local/bin/volumio-usb-autoplay.sh

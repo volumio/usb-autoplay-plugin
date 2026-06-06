@@ -1,8 +1,14 @@
 #!/bin/bash
 set -e
 
-LOGFILE="/var/log/volumio-usb-autoplay.log"
+LOGFILE="/data/plugins/system_hardware/usb-autoplay-plugin/volumio-usb-autoplay.log"
 CONFIG_FILE="/data/plugins/system_hardware/usb-autoplay-plugin/usb-autoplay-runtime.conf"
+
+mkdir -p "$(dirname "$LOGFILE")"
+touch "$LOGFILE"
+chown volumiooem:volumio "$LOGFILE" 2>/dev/null || true
+chmod 664 "$LOGFILE" 2>/dev/null || true
+
 
 ENABLED=1
 USB_URI="music-library/USB"
@@ -16,7 +22,11 @@ if [ -f "$CONFIG_FILE" ]; then
     . "$CONFIG_FILE"
 fi
 
-log() { echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> "$LOGFILE"; }
+
+log() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> "$LOGFILE" 2>/dev/null || true
+}
+
 api_get() { curl -sS --max-time 10 "$1"; }
 api_post_json() { curl -sS --max-time 20 -X POST "$1" -H "Content-Type: application/json" -d "$2"; }
 
@@ -82,6 +92,14 @@ api_post_json "http://localhost:3000/api/v1/replaceAndPlay" "$PAYLOAD" >> "$LOGF
     log "ERROR: replaceAndPlay failed"
     exit 1
 }
+
+
+log "Starting playback through Volumio"
+sleep 2
+api_get "http://localhost:3000/api/v1/commands/?cmd=play" > /dev/null 2>&1 || true
+sleep 2
+api_get "http://localhost:3000/api/v1/commands/?cmd=play" > /dev/null 2>&1 || true
+
 
 log "USB autoplay command sent successfully"
 exit 0
