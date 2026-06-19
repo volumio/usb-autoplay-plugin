@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-LOGFILE="/data/plugins/system_hardware/usb-autoplay-plugin/volumio-usb-autoplay.log"
-CONFIG_FILE="/data/plugins/system_hardware/usb-autoplay-plugin/usb-autoplay-runtime.conf"
+LOGFILE="/data/plugins/system_hardware/usb_autoplay_plugin/volumio-usb-autoplay.log"
+CONFIG_FILE="/data/plugins/system_hardware/usb_autoplay_plugin/usb-autoplay-runtime.conf"
 
 mkdir -p "$(dirname "$LOGFILE")"
 touch "$LOGFILE"

@@ -10,7 +10,7 @@ function ControllerUsbAutoplay(context) {
     this.commandRouter = this.context.coreCommand;
     this.logger = this.context.logger;
     this.configManager = this.context.configManager;
-    this.runtimeConfigPath = "/data/plugins/system_hardware/usb-autoplay-plugin/usb-autoplay-runtime.conf";
+    this.runtimeConfigPath = "/data/plugins/system_hardware/usb_autoplay_plugin/usb-autoplay-runtime.conf";
 }
 
 ControllerUsbAutoplay.prototype.onVolumioStart = function () {
