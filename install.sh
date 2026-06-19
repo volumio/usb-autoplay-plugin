@@ -1,6 +1,16 @@
 #!/bin/bash
 set -e
-PLUGIN_DIR="$(cd "$(dirname "$0")" && pwd)"
+# Resolve the plugin's installed folder. In OEM builds all plugin install.sh
+# scripts are concatenated into one file, so $0 points to the consolidated
+# script, not this plugin. Detect the actual install location like other plugins.
+NAME="usb_autoplay_plugin"
+if [ -d "/data/plugins/system_controller/${NAME}" ]; then
+  PLUGIN_DIR="/data/plugins/system_controller/${NAME}"
+elif [ -d "/myvolumio/plugins/system_controller/${NAME}" ]; then
+  PLUGIN_DIR="/myvolumio/plugins/system_controller/${NAME}"
+else
+  PLUGIN_DIR="/volumio/app/plugins/system_controller/${NAME}"
+fi
 echo "Installing USB Autoplay plugin"
 if ! command -v curl >/dev/null 2>&1; then
   echo "curl not found, installing curl"
