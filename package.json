@@ -9,7 +9,7 @@
   "engines": { "node": ">=14" },
   "volumio_info": {
     "prettyName": "USB Autoplay",
-    "plugin_type": "system_hardware",
+    "plugin_type": "system_controller",
     "icon": "fa-usb",
     "boot_priority": "10",
     "os": ["bookworm"],

@@ -6,7 +6,7 @@
       "element": "section",
       "label": "USB_AUTOPLAY.SETTINGS_SECTION",
       "icon": "fa-usb",
-      "onSave": { "type": "controller", "endpoint": "system_hardware/usb_autoplay_plugin", "method": "saveSettings" },
+      "onSave": { "type": "controller", "endpoint": "system_controller/usb_autoplay_plugin", "method": "saveSettings" },
       "content": [
         { "id": "enabled", "element": "switch", "label": "USB_AUTOPLAY.ENABLE_LABEL", "value": true },
         { "id": "usbUri", "element": "input", "label": "USB_AUTOPLAY.USB_URI_LABEL", "value": "music-library/USB", "description": "USB_AUTOPLAY.USB_URI_DESCRIPTION" },
