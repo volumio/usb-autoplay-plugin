@@ -1,12 +1,13 @@
 #!/bin/bash
 set -e
 
-LOGFILE="/data/plugins/system_controller/usb_autoplay_plugin/volumio-usb-autoplay.log"
-CONFIG_FILE="/data/plugins/system_controller/usb_autoplay_plugin/usb-autoplay-runtime.conf"
+LOGFILE="/var/log/volumio-usb-autoplay.log"
+CONFIG_FILE="/data/configuration/system_controller/usb_autoplay_plugin/usb-autoplay-runtime.conf"
 
-mkdir -p "$(dirname "$LOGFILE")"
-touch "$LOGFILE"
-chown volumiooem:volumio "$LOGFILE" 2>/dev/null || true
+# Service runs as the backend user (volumio); install.sh pre-creates the log
+# owned by volumio. Ensure it exists but never abort if the path isn't writable.
+mkdir -p "$(dirname "$LOGFILE")" 2>/dev/null || true
+touch "$LOGFILE" 2>/dev/null || true
 chmod 664 "$LOGFILE" 2>/dev/null || true
 
 
