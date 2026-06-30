@@ -2,6 +2,7 @@
 
 var libQ = require("kew");
 var fs = require("fs");
+var path = require("path");
 
 module.exports = ControllerUsbAutoplay;
 
@@ -10,7 +11,7 @@ function ControllerUsbAutoplay(context) {
     this.commandRouter = this.context.coreCommand;
     this.logger = this.context.logger;
     this.configManager = this.context.configManager;
-    this.runtimeConfigPath = "/data/plugins/system_controller/usb_autoplay_plugin/usb-autoplay-runtime.conf";
+    this.runtimeConfigPath = "/data/configuration/system_controller/usb_autoplay_plugin/usb-autoplay-runtime.conf";
 }
 
 ControllerUsbAutoplay.prototype.onVolumioStart = function () {
@@ -84,7 +85,7 @@ ControllerUsbAutoplay.prototype.writeRuntimeConfigWithEnabled = function (enable
     content += "REPEAT_PLAY=" + (this.config.get("repeat") ? "1" : "0") + "\n";
     content += "KILL_PULSEAUDIO=" + (this.config.get("killPulseAudio") ? "1" : "0") + "\n";
     content += "MAX_WAIT_API=60\nMAX_WAIT_USB=120\n";
-    try { fs.writeFileSync(this.runtimeConfigPath, content, "utf8"); this.logger.info("[USB Autoplay] Runtime config written to " + this.runtimeConfigPath); }
+    try { fs.mkdirSync(path.dirname(this.runtimeConfigPath), { recursive: true }); fs.writeFileSync(this.runtimeConfigPath, content, "utf8"); this.logger.info("[USB Autoplay] Runtime config written to " + this.runtimeConfigPath); }
     catch (e) { this.logger.error("[USB Autoplay] Could not write runtime config: " + e.message); }
 };
 ControllerUsbAutoplay.prototype.shellString = function (value) { return '"' + String(value).replace(/(["\\$`])/g, "\\$1") + '"'; };

@@ -25,18 +25,13 @@ cp "$PLUGIN_DIR/systemd/volumio-usb-autoplay.service" /etc/systemd/system/volumi
 chmod 644 /etc/systemd/system/volumio-usb-autoplay.service
 cp "$PLUGIN_DIR/udev/99-volumio-usb-autoplay.rules" /etc/udev/rules.d/99-volumio-usb-autoplay.rules
 chmod 644 /etc/udev/rules.d/99-volumio-usb-autoplay.rules
-cat > "$PLUGIN_DIR/usb-autoplay-runtime.conf" <<EOF2
-ENABLED=1
-USB_URI="music-library/USB"
-RANDOM_PLAY=1
-REPEAT_PLAY=1
-KILL_PULSEAUDIO=1
-MAX_WAIT_API=60
-MAX_WAIT_USB=120
-EOF2
-chmod 664 "$PLUGIN_DIR/usb-autoplay-runtime.conf" || true
+# Runtime config is written by index.js (onStart, as the volumio backend) to
+# /data/configuration/system_controller/usb_autoplay_plugin/usb-autoplay-runtime.conf
+# — a path volumio owns and can rewrite, present in both user-install and baked
+# builds. Don't seed it here: creating it at build time would leave a root-owned
+# dir the backend can't write to. The script falls back to defaults if absent.
 touch /var/log/volumio-usb-autoplay.log
-chown volumiooem:volumio /var/log/volumio-usb-autoplay.log || true
+chown volumio:volumio /var/log/volumio-usb-autoplay.log || true
 chmod 664 /var/log/volumio-usb-autoplay.log || true
 systemctl daemon-reload
 udevadm control --reload
